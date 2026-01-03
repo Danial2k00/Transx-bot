@@ -18,9 +18,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #FAFAFA 0%, #F5F5F5 50%, #FAFAFA 100%);
+  background: #F7FAF5;
   background-attachment: fixed;
-  color: #111827;
+  color: #4A5A4A;
   overflow-x: hidden;
   position: relative;
 }
@@ -34,8 +34,8 @@ body::before {
   width: 100%;
   height: 100%;
   background-image: 
-    radial-gradient(circle at 20% 50%, rgba(220, 38, 38, 0.02) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.02) 0%, transparent 50%);
+    radial-gradient(circle at 20% 50%, rgba(107, 142, 35, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(143, 175, 106, 0.02) 0%, transparent 50%);
   pointer-events: none;
   z-index: 0;
   opacity: 1;
@@ -61,12 +61,12 @@ body::before {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #DC2626;
+  background: #6B8E23;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #10B981;
+  background: #8FAF6A;
 }
 
 /* Glassmorphism utility */
@@ -90,7 +90,7 @@ body::before {
 
 /* Gradient Text */
 .gradient-text {
-  background: linear-gradient(135deg, #DC2626 0%, #10B981 100%);
+  background: linear-gradient(135deg, #6B8E23 0%, #8FAF6A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

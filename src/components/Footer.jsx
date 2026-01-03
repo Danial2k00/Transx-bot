@@ -23,8 +23,9 @@ const Footer = () => {
   }
 
   return (
-    <footer className="border-t border-gray-200 mt-12 md:mt-16 lg:mt-20" style={{
-      background: 'linear-gradient(135deg, #FAFAFA 0%, #F5F5F5 50%, #FAFAFA 100%)',
+    <footer className="border-t mt-12 md:mt-16 lg:mt-20" style={{
+      background: '#EEF3EC',
+      borderColor: 'rgba(107, 142, 35, 0.1)'
     }}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10 lg:py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8">
@@ -50,7 +51,7 @@ const Footer = () => {
                 />
               </div>
             </Link>
-            <p className="text-sm max-w-md" style={{ color: '#374151' }}>
+            <p className="text-sm max-w-md" style={{ color: '#4A5A4A' }}>
               Advanced AI-powered trading solutions for stocks, crypto, forex, and more.
               Transform your trading strategy with intelligent automation.
             </p>
@@ -58,16 +59,16 @@ const Footer = () => {
 
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
-              <h3 className="font-semibold mb-4" style={{ color: '#0F172A' }}>{category}</h3>
+              <h3 className="font-semibold mb-4" style={{ color: '#243024' }}>{category}</h3>
               <ul className="space-y-2">
                 {links.map((link) => (
                   <li key={link.label}>
                     <Link
                       to={link.path}
                       className="text-sm transition-colors"
-                      style={{ color: '#6B7280' }}
-                      onMouseEnter={(e) => e.target.style.color = '#DC2626'}
-                      onMouseLeave={(e) => e.target.style.color = '#6B7280'}
+                      style={{ color: '#7A8A7A' }}
+                      onMouseEnter={(e) => e.target.style.color = '#6B8E23'}
+                      onMouseLeave={(e) => e.target.style.color = '#7A8A7A'}
                     >
                       {link.label}
                     </Link>
@@ -78,8 +79,8 @@ const Footer = () => {
           ))}
         </div>
 
-        <div className="mt-6 md:mt-8 pt-6 md:pt-8 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-center sm:text-left" style={{ color: '#6B7280' }}>
+        <div className="mt-6 md:mt-8 pt-6 md:pt-8 border-t flex flex-col sm:flex-row justify-between items-center gap-4" style={{ borderColor: 'rgba(107, 142, 35, 0.1)' }}>
+            <p className="text-sm text-center sm:text-left" style={{ color: '#7A8A7A' }}>
             &copy; {new Date().getFullYear()} Next Gen Bot. All rights reserved.
           </p>
           <div className="flex space-x-6">
@@ -88,9 +89,9 @@ const Footer = () => {
                 key={social}
                 href="#"
                 className="transition-colors duration-200 text-sm"
-                style={{ color: '#6B7280' }}
-                onMouseEnter={(e) => e.target.style.color = '#6366F1'}
-                onMouseLeave={(e) => e.target.style.color = '#6B7280'}
+                style={{ color: '#7A8A7A' }}
+                onMouseEnter={(e) => e.target.style.color = '#6B8E23'}
+                onMouseLeave={(e) => e.target.style.color = '#7A8A7A'}
               >
                 {social}
               </a>

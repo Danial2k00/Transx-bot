@@ -147,22 +147,29 @@ const Navbar = () => {
               onClick={handleHomeClick}
               className={`relative inline-block text-sm font-medium transition-colors ${
                 location.pathname === '/' || isDropdownActive
-                  ? 'text-secondary'
-                  : 'text-text-light hover:text-secondary'
+                  ? 'text-olive-soft'
+                  : 'text-text-body hover:text-olive-primary'
               }`}
+              style={{
+                color: location.pathname === '/' || isDropdownActive ? '#8FAF6A' : '#4A5A4A'
+              }}
             >
               Home
               {(location.pathname === '/' || isDropdownActive) && (
                 <motion.div
                   layoutId="navbar-indicator"
-                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-secondary"
+                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-olive-primary to-olive-soft"
+              style={{
+                background: 'linear-gradient(to right, #6B8E23, #8FAF6A)'
+              }}
                   initial={false}
                   transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                 />
               )}
             </Link>
             <motion.svg
-              className="w-4 h-4 text-text-light flex-shrink-0 pointer-events-none"
+              className="w-4 h-4 flex-shrink-0 pointer-events-none"
+              style={{ color: '#4A5A4A' }}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -189,10 +196,11 @@ const Navbar = () => {
                 className="absolute top-full left-0 mt-3 w-56 rounded-lg border border-gray-200 overflow-hidden"
                 style={{ 
                   zIndex: 50,
-                  background: 'rgba(255, 255, 255, 0.95)',
+                  background: 'rgba(247, 250, 245, 0.98)',
                   backdropFilter: 'blur(10px)',
                   WebkitBackdropFilter: 'blur(10px)',
-                  boxShadow: '0 20px 40px -12px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05)' 
+                  boxShadow: '0 20px 40px -12px rgba(107, 142, 35, 0.12), 0 0 0 1px rgba(107, 142, 35, 0.1)',
+                  borderColor: 'rgba(107, 142, 35, 0.15)'
                 }}
               >
                 <div className="py-2">
@@ -209,9 +217,12 @@ const Navbar = () => {
                         onKeyDown={(e) => handleKeyDown(e, item.path)}
                         className={`block px-4 py-3 text-sm font-medium transition-all duration-200 ${
                           location.pathname === item.path
-                            ? 'text-secondary bg-primary/10'
-                            : 'text-[#0F172A] hover:text-secondary hover:bg-primary/10'
+                            ? 'text-olive-soft bg-olive-primary/10'
+                            : 'text-text-heading hover:text-olive-primary hover:bg-olive-primary/10'
                         }`}
+                        style={{
+                          color: location.pathname === item.path ? '#8FAF6A' : '#243024'
+                        }}
                         style={{ letterSpacing: '-0.01em' }}
                         role="menuitem"
                         tabIndex={0}
@@ -231,7 +242,15 @@ const Navbar = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => navigate('/register')}
-          className="px-6 py-2.5 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold text-sm hover:shadow-lg hover:shadow-primary/50 transition-all cursor-pointer"
+          className="px-6 py-2.5 rounded-lg text-white font-semibold text-sm hover:shadow-lg transition-all cursor-pointer"
+          style={{
+            background: 'linear-gradient(135deg, #6B8E23 0%, #8FAF6A 100%)',
+            boxShadow: '0 4px 16px rgba(107, 142, 35, 0.3)'
+          }}
+          whileHover={{
+            boxShadow: '0 6px 24px rgba(107, 142, 35, 0.4)',
+            scale: 1.03
+          }}
         >
           Register
         </motion.button>
@@ -241,7 +260,11 @@ const Navbar = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => navigate('/download')}
-          className="px-6 py-2.5 rounded-lg border-2 border-primary text-primary font-semibold text-sm hover:bg-primary/10 transition-all cursor-pointer"
+          className="px-6 py-2.5 rounded-lg border-2 font-semibold text-sm hover:bg-olive-primary/10 transition-all cursor-pointer"
+          style={{
+            borderColor: '#6B8E23',
+            color: '#6B8E23'
+          }}
         >
           Download
         </motion.button>
@@ -262,7 +285,8 @@ const Navbar = () => {
             style={{ minWidth: '44px', minHeight: '44px' }}
           >
             <motion.svg
-              className="w-6 h-6 text-text-light"
+              className="w-6 h-6"
+              style={{ color: '#4A5A4A' }}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -289,10 +313,11 @@ const Navbar = () => {
                 className="absolute top-full right-0 mt-2 w-48 rounded-lg border border-gray-200 overflow-hidden"
                 style={{ 
                   zIndex: 50,
-                  background: 'rgba(255, 255, 255, 0.98)',
+                  background: 'rgba(247, 250, 245, 0.98)',
                   backdropFilter: 'blur(10px)',
                   WebkitBackdropFilter: 'blur(10px)',
-                  boxShadow: '0 20px 40px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05)' 
+                  boxShadow: '0 20px 40px -12px rgba(107, 142, 35, 0.15), 0 0 0 1px rgba(107, 142, 35, 0.1)',
+                  borderColor: 'rgba(107, 142, 35, 0.15)'
                 }}
               >
                 <div className="py-1">
@@ -304,9 +329,12 @@ const Navbar = () => {
                     }}
                     className={`block px-4 py-3 text-base font-medium transition-all duration-200 ${
                       location.pathname === '/'
-                        ? 'text-secondary bg-primary/10'
-                        : 'text-[#0F172A] active:bg-primary/10'
+                        ? 'text-olive-soft bg-olive-primary/10'
+                        : 'text-text-heading active:bg-olive-primary/10'
                     }`}
+                    style={{
+                      color: location.pathname === '/' ? '#8FAF6A' : '#243024'
+                    }}
                     style={{ minHeight: '44px', display: 'flex', alignItems: 'center' }}
                   >
                     Home
@@ -324,9 +352,12 @@ const Navbar = () => {
                         onKeyDown={(e) => handleKeyDown(e, item.path)}
                         className={`block px-4 py-3 text-base font-medium transition-all duration-200 ${
                           location.pathname === item.path
-                            ? 'text-secondary bg-primary/10'
-                            : 'text-[#0F172A] active:bg-primary/10'
+                            ? 'text-olive-soft bg-olive-primary/10'
+                            : 'text-text-heading active:bg-olive-primary/10'
                         }`}
+                        style={{
+                          color: location.pathname === item.path ? '#8FAF6A' : '#243024'
+                        }}
                         style={{ minHeight: '44px', display: 'flex', alignItems: 'center' }}
                         role="menuitem"
                         tabIndex={0}
@@ -349,7 +380,10 @@ const Navbar = () => {
                         navigate('/register')
                         setIsDropdownOpen(false)
                       }}
-                      className="w-full text-left px-4 py-3 text-base font-semibold bg-gradient-to-r from-primary to-secondary text-white active:opacity-90 transition-all cursor-pointer"
+                      className="w-full text-left px-4 py-3 text-base font-semibold text-white active:opacity-90 transition-all cursor-pointer"
+                      style={{
+                        background: 'linear-gradient(135deg, #6B8E23 0%, #8FAF6A 100%)'
+                      }}
                       style={{ minHeight: '48px', display: 'flex', alignItems: 'center' }}
                     >
                       Register
@@ -369,7 +403,11 @@ const Navbar = () => {
                         navigate('/download')
                         setIsDropdownOpen(false)
                       }}
-                      className="w-full text-left px-4 py-3 text-base font-semibold border-2 border-primary text-primary active:bg-primary/10 transition-all cursor-pointer"
+                      className="w-full text-left px-4 py-3 text-base font-semibold border-2 active:bg-olive-primary/10 transition-all cursor-pointer"
+                      style={{
+                        borderColor: '#6B8E23',
+                        color: '#6B8E23'
+                      }}
                       style={{ minHeight: '48px', display: 'flex', alignItems: 'center' }}
                     >
                       Download
@@ -393,11 +431,12 @@ const Navbar = () => {
             initial={{ y: 0, opacity: 1 }}
             exit={{ y: -100, opacity: 0 }}
             transition={{ duration: 0.4, ease: 'easeInOut' }}
-            className="fixed top-0 left-0 right-0 z-40 border-b border-gray-200"
+            className="fixed top-0 left-0 right-0 z-40 border-b"
             style={{
-              background: 'rgba(246, 247, 251, 0.9)',
+              background: 'rgba(247, 250, 245, 0.95)',
               backdropFilter: 'blur(10px)',
               WebkitBackdropFilter: 'blur(10px)',
+              borderColor: 'rgba(107, 142, 35, 0.1)'
             }}
           >
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -417,12 +456,13 @@ const Navbar = () => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -100, opacity: 0 }}
             transition={{ duration: 0.4, ease: 'easeInOut' }}
-            className="fixed top-0 left-0 right-0 z-40 border-b border-gray-200"
+            className="fixed top-0 left-0 right-0 z-40 border-b"
             style={{
-              background: 'rgba(255, 255, 255, 0.98)',
+              background: 'rgba(247, 250, 245, 0.98)',
               backdropFilter: 'blur(10px)',
               WebkitBackdropFilter: 'blur(10px)',
-              boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+              boxShadow: '0 1px 3px rgba(107, 142, 35, 0.08)',
+              borderColor: 'rgba(107, 142, 35, 0.1)'
             }}
           >
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">

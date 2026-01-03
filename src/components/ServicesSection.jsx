@@ -15,7 +15,7 @@ const ServicesSection = () => {
       ),
       title: 'Real-Time Forex Trading',
       description: 'AI-driven live market execution with real-time price analysis and instant trade decisions.',
-      gradient: ['#DC2626', '#10B981'],
+      gradient: ['#6B8E23', '#8FAF6A'],
     },
     {
       icon: (
@@ -25,7 +25,7 @@ const ServicesSection = () => {
       ),
       title: 'Automated Trading Tools',
       description: 'Advanced AI algorithms automate trades, manage risk, and optimize strategies 24/7.',
-      gradient: ['#10B981', '#DC2626'],
+      gradient: ['#8FAF6A', '#4CAF50'],
     },
     {
       icon: (
@@ -35,7 +35,7 @@ const ServicesSection = () => {
       ),
       title: 'Personalized Trading Plans',
       description: 'Custom AI strategies tailored to user goals, capital, and risk tolerance.',
-      gradient: ['#8B5CF6', '#EC4899'],
+      gradient: ['#6B8E23', '#5E7C3A'],
     },
     {
       icon: (
@@ -45,7 +45,7 @@ const ServicesSection = () => {
       ),
       title: 'Expert Market Insights',
       description: 'AI + expert-driven insights on trends, volatility, and high-probability setups.',
-      gradient: ['#10B981', '#16A34A'],
+      gradient: ['#8FAF6A', '#4CAF50'],
     },
     {
       icon: (
@@ -55,7 +55,7 @@ const ServicesSection = () => {
       ),
       title: 'Multi-Asset Trading Software',
       description: 'Unified trading across Forex, Crypto, Stocks, Commodities, and F.D / N.F.D.',
-      gradient: ['#DC2626', '#EF4444'],
+      gradient: ['#6B8E23', '#5E7C3A'],
     },
     {
       icon: (
@@ -65,7 +65,7 @@ const ServicesSection = () => {
       ),
       title: 'Strategy & Risk Consulting',
       description: 'AI-assisted risk management and strategy optimization for long-term growth.',
-      gradient: ['#10B981', '#16A34A'],
+      gradient: ['#8FAF6A', '#4CAF50'],
     },
   ]
 
@@ -96,7 +96,7 @@ const ServicesSection = () => {
 
   return (
     <section ref={ref} className="py-12 md:py-16 lg:py-20" style={{
-      background: 'linear-gradient(135deg, #FAFAFA 0%, #F5F5F5 50%, #FAFAFA 100%)',
+      background: '#EEF3EC',
     }}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Section Header */}
@@ -106,10 +106,10 @@ const ServicesSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-10 md:mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4" style={{ color: '#0F172A' }}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4" style={{ color: '#243024' }}>
             Services We <span className="gradient-text">Offer</span>
           </h2>
-          <p className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto px-4" style={{ color: '#374151' }}>
+          <p className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto px-4" style={{ color: '#4A5A4A' }}>
             Smart AI-powered trading solutions designed for modern investors
           </p>
         </motion.div>
@@ -179,7 +179,8 @@ const ServiceCard = ({ service, index, variants }) => {
         animate={{
           rotateX: rotate.x,
           rotateY: rotate.y,
-          scale: isHovered ? 1.06 : 1,
+          y: isHovered ? -6 : 0,
+          scale: isHovered ? 1.02 : 1,
           z: isHovered ? 20 : 0,
         }}
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
@@ -188,10 +189,11 @@ const ServiceCard = ({ service, index, variants }) => {
         }}
       >
         <div
-          className="relative h-full p-5 sm:p-6 md:p-8 rounded-2xl border border-gray-200 overflow-hidden group"
+          className="relative h-full p-5 sm:p-6 md:p-8 rounded-2xl border overflow-hidden group"
           style={{
-            background: `linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%)`,
-            boxShadow: '0 4px 24px rgba(220, 38, 38, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.04)',
+            background: '#FFFFFF',
+            boxShadow: '0 4px 24px rgba(107, 142, 35, 0.08), 0 0 0 1px rgba(107, 142, 35, 0.08)',
+            borderColor: 'rgba(107, 142, 35, 0.1)',
           }}
         >
           {/* Glow Effect */}
@@ -226,12 +228,12 @@ const ServiceCard = ({ service, index, variants }) => {
             </motion.div>
 
             <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3" style={{ 
-              color: '#0F172A',
-              textShadow: '0 1px 2px rgba(0, 0, 0, 0.06)'
+              color: '#243024',
+              textShadow: '0 1px 2px rgba(0, 0, 0, 0.04)'
             }}>{service.title}</h3>
             <p className="text-sm sm:text-base leading-relaxed" style={{ 
-              color: '#374151',
-              textShadow: '0 1px 2px rgba(0, 0, 0, 0.06)'
+              color: '#4A5A4A',
+              textShadow: '0 1px 2px rgba(0, 0, 0, 0.04)'
             }}>{service.description}</p>
           </div>
         </div>

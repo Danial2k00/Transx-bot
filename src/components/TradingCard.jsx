@@ -60,7 +60,8 @@ const TradingCard = ({ title, description, icon, gradient, path, delay = 0 }) =>
         animate={{
           rotateX: rotate.x,
           rotateY: rotate.y,
-          scale: isHovered ? 1.05 : 1,
+          y: isHovered ? -6 : 0,
+          scale: isHovered ? 1.02 : 1,
         }}
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         style={{
@@ -68,10 +69,11 @@ const TradingCard = ({ title, description, icon, gradient, path, delay = 0 }) =>
         }}
       >
         <div
-          className="relative h-full p-8 rounded-2xl border border-gray-200 overflow-hidden group"
+          className="relative h-full p-8 rounded-2xl border overflow-hidden group"
           style={{
-            background: `linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%)`,
-            boxShadow: '0 4px 24px rgba(220, 38, 38, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.04)',
+            background: '#FFFFFF',
+            boxShadow: '0 4px 24px rgba(107, 142, 35, 0.08), 0 0 0 1px rgba(107, 142, 35, 0.08)',
+            borderColor: 'rgba(107, 142, 35, 0.1)',
           }}
         >
           {/* Glow Effect */}
@@ -106,17 +108,17 @@ const TradingCard = ({ title, description, icon, gradient, path, delay = 0 }) =>
             </motion.div>
 
             <h3 className="text-2xl font-bold mb-3" style={{ 
-              color: '#0F172A',
-              textShadow: '0 1px 2px rgba(0, 0, 0, 0.06)'
+              color: '#243024',
+              textShadow: '0 1px 2px rgba(0, 0, 0, 0.04)'
             }}>{title}</h3>
             <p className="text-sm leading-relaxed" style={{ 
-              color: '#374151',
-              textShadow: '0 1px 2px rgba(0, 0, 0, 0.06)'
+              color: '#4A5A4A',
+              textShadow: '0 1px 2px rgba(0, 0, 0, 0.04)'
             }}>{description}</p>
 
             <motion.div
               className="mt-6 flex items-center font-semibold text-sm"
-              style={{ color: '#2563EB' }}
+              style={{ color: '#6B8E23' }}
               animate={{
                 x: isHovered ? 10 : 0,
               }}
