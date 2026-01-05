@@ -90,20 +90,20 @@ const HeroVisual = () => {
         <svg viewBox="0 0 200 120" className="w-full h-full">
           {/* Candlesticks */}
           <g>
-            {/* Green candles (up) */}
-            <rect x="20" y="40" width="8" height="30" fill="#10B981" opacity="0.8" />
-            <line x1="24" y1="40" x2="24" y2="35" stroke="#10B981" strokeWidth="1.5" />
-            <line x1="24" y1="70" x2="24" y2="75" stroke="#10B981" strokeWidth="1.5" />
+            {/* Bullish candles (up) - Red */}
+            <rect x="20" y="40" width="8" height="30" fill="#DC2626" opacity="0.8" />
+            <line x1="24" y1="40" x2="24" y2="35" stroke="#DC2626" strokeWidth="1.5" />
+            <line x1="24" y1="70" x2="24" y2="75" stroke="#DC2626" strokeWidth="1.5" />
             
-            <rect x="40" y="30" width="8" height="40" fill="#10B981" opacity="0.8" />
-            <line x1="44" y1="30" x2="44" y2="25" stroke="#10B981" strokeWidth="1.5" />
-            <line x1="44" y1="70" x2="44" y2="75" stroke="#10B981" strokeWidth="1.5" />
+            <rect x="40" y="30" width="8" height="40" fill="#DC2626" opacity="0.8" />
+            <line x1="44" y1="30" x2="44" y2="25" stroke="#DC2626" strokeWidth="1.5" />
+            <line x1="44" y1="70" x2="44" y2="75" stroke="#DC2626" strokeWidth="1.5" />
             
-            <rect x="60" y="50" width="8" height="20" fill="#10B981" opacity="0.8" />
-            <line x1="64" y1="50" x2="64" y2="45" stroke="#10B981" strokeWidth="1.5" />
-            <line x1="64" y1="70" x2="64" y2="75" stroke="#10B981" strokeWidth="1.5" />
+            <rect x="60" y="50" width="8" height="20" fill="#DC2626" opacity="0.8" />
+            <line x1="64" y1="50" x2="64" y2="45" stroke="#DC2626" strokeWidth="1.5" />
+            <line x1="64" y1="70" x2="64" y2="75" stroke="#DC2626" strokeWidth="1.5" />
             
-            {/* Red candles (down) */}
+            {/* Bearish candles (down) */}
             <rect x="80" y="20" width="8" height="50" fill="#EF4444" opacity="0.8" />
             <line x1="84" y1="20" x2="84" y2="15" stroke="#EF4444" strokeWidth="1.5" />
             <line x1="84" y1="70" x2="84" y2="75" stroke="#EF4444" strokeWidth="1.5" />
@@ -112,13 +112,13 @@ const HeroVisual = () => {
             <line x1="104" y1="35" x2="104" y2="30" stroke="#EF4444" strokeWidth="1.5" />
             <line x1="104" y1="70" x2="104" y2="75" stroke="#EF4444" strokeWidth="1.5" />
             
-            <rect x="120" y="25" width="8" height="45" fill="#10B981" opacity="0.8" />
-            <line x1="124" y1="25" x2="124" y2="20" stroke="#10B981" strokeWidth="1.5" />
-            <line x1="124" y1="70" x2="124" y2="75" stroke="#10B981" strokeWidth="1.5" />
+            <rect x="120" y="25" width="8" height="45" fill="#DC2626" opacity="0.8" />
+            <line x1="124" y1="25" x2="124" y2="20" stroke="#DC2626" strokeWidth="1.5" />
+            <line x1="124" y1="70" x2="124" y2="75" stroke="#DC2626" strokeWidth="1.5" />
             
-            <rect x="140" y="45" width="8" height="25" fill="#10B981" opacity="0.8" />
-            <line x1="144" y1="45" x2="144" y2="40" stroke="#10B981" strokeWidth="1.5" />
-            <line x1="144" y1="70" x2="144" y2="75" stroke="#10B981" strokeWidth="1.5" />
+            <rect x="140" y="45" width="8" height="25" fill="#DC2626" opacity="0.8" />
+            <line x1="144" y1="45" x2="144" y2="40" stroke="#DC2626" strokeWidth="1.5" />
+            <line x1="144" y1="70" x2="144" y2="75" stroke="#DC2626" strokeWidth="1.5" />
             
             <rect x="160" y="15" width="8" height="55" fill="#EF4444" opacity="0.8" />
             <line x1="164" y1="15" x2="164" y2="10" stroke="#EF4444" strokeWidth="1.5" />

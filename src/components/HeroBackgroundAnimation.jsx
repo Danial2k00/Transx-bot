@@ -97,19 +97,19 @@ const HeroBackgroundAnimation = () => {
       <svg className="financial-lines" width="100%" height="100%">
         <defs>
           <linearGradient id="lineGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="rgba(220, 38, 38, 0.12)" stopOpacity="0" />
-                <stop offset="50%" stopColor="rgba(220, 38, 38, 0.2)" stopOpacity="1" />
-                <stop offset="100%" stopColor="rgba(220, 38, 38, 0.12)" stopOpacity="0" />
+                <stop offset="0%" stopColor="rgba(107, 142, 35, 0.12)" stopOpacity="0" />
+                <stop offset="50%" stopColor="rgba(107, 142, 35, 0.2)" stopOpacity="1" />
+                <stop offset="100%" stopColor="rgba(107, 142, 35, 0.12)" stopOpacity="0" />
           </linearGradient>
           <linearGradient id="lineGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="rgba(16, 185, 129, 0.12)" stopOpacity="0" />
-            <stop offset="50%" stopColor="rgba(16, 185, 129, 0.2)" stopOpacity="1" />
-            <stop offset="100%" stopColor="rgba(16, 185, 129, 0.12)" stopOpacity="0" />
+            <stop offset="0%" stopColor="rgba(76, 175, 80, 0.12)" stopOpacity="0" />
+            <stop offset="50%" stopColor="rgba(76, 175, 80, 0.2)" stopOpacity="1" />
+            <stop offset="100%" stopColor="rgba(76, 175, 80, 0.12)" stopOpacity="0" />
           </linearGradient>
           <linearGradient id="lineGradient3" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="rgba(16, 185, 129, 0.15)" stopOpacity="0" />
-            <stop offset="50%" stopColor="rgba(16, 185, 129, 0.25)" stopOpacity="1" />
-            <stop offset="100%" stopColor="rgba(16, 185, 129, 0.15)" stopOpacity="0" />
+            <stop offset="0%" stopColor="rgba(76, 175, 80, 0.15)" stopOpacity="0" />
+            <stop offset="50%" stopColor="rgba(76, 175, 80, 0.25)" stopOpacity="1" />
+            <stop offset="100%" stopColor="rgba(76, 175, 80, 0.15)" stopOpacity="0" />
           </linearGradient>
         </defs>
         

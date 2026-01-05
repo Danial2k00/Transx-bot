@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+import { slideInFromBottom, slideInFromLeft, slideInFromRight, sectionHeader, staggerContainer, viewportConfig, buttonInteraction } from '../utils/motionUtils'
 
 const Forex = () => {
   const navigate = useNavigate()
@@ -35,9 +36,10 @@ const Forex = () => {
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            variants={slideInFromBottom}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
@@ -49,8 +51,10 @@ const Forex = () => {
               market sentiment to optimize your trading strategies.
             </p>
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              variants={buttonInteraction}
+              initial="rest"
+              whileHover="hover"
+              whileTap="tap"
               className="px-8 py-4 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold text-lg hover:shadow-2xl hover:shadow-primary/50 transition-all"
             >
               Start Forex Trading
@@ -63,10 +67,10 @@ const Forex = () => {
       <section className="py-20 bg-bg-dark">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            variants={sectionHeader}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -74,14 +78,17 @@ const Forex = () => {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto"
+          >
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                variants={index % 2 === 0 ? slideInFromLeft : slideInFromRight}
                 className="p-8 rounded-2xl bg-card-dark border border-white/10 hover:border-primary/50 transition-all group"
               >
                 <div className="text-5xl mb-4">{feature.icon}</div>
@@ -89,7 +96,7 @@ const Forex = () => {
                 <p className="text-text-muted leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -97,10 +104,10 @@ const Forex = () => {
       <section className="py-20 bg-card-dark border-t border-white/10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            variants={slideInFromBottom}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
             className="text-center max-w-3xl mx-auto"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -111,15 +118,19 @@ const Forex = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                variants={buttonInteraction}
+                initial="rest"
+                whileHover="hover"
+                whileTap="tap"
                 className="px-8 py-4 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold text-lg hover:shadow-2xl hover:shadow-primary/50 transition-all"
               >
                 Get Started
               </motion.button>
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                variants={buttonInteraction}
+                initial="rest"
+                whileHover="hover"
+                whileTap="tap"
                 onClick={() => navigate('/')}
                 className="px-8 py-4 rounded-lg border-2 border-primary text-primary font-semibold text-lg hover:bg-primary/10 transition-all"
               >

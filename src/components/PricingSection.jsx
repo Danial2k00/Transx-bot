@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import './PricingSection.css'
+import { slideInFromBottom, sectionHeader, staggerContainer, viewportConfig, buttonInteraction, riseWithScale } from '../utils/motionUtils'
 
 const PricingSection = () => {
   const navigate = useNavigate()
@@ -72,21 +73,15 @@ const PricingSection = () => {
     },
   }
 
-  // Card animation variants - subtle and fast
+  // Card animation variants - rise with scale + glow
   const getCardVariants = (index) => {
-    const isCenter = index === 1
     return {
-      hidden: { 
-        opacity: 0, 
-        y: 20,
-      },
+      ...riseWithScale,
       visible: {
-        opacity: 1,
-        y: 0,
+        ...riseWithScale.visible,
         transition: {
-          duration: 0.4,
-          ease: [0.25, 0.46, 0.45, 0.94],
-          delay: isCenter ? 0 : 0.1,
+          ...riseWithScale.visible.transition,
+          delay: index * 0.12,
         },
       },
     }
@@ -122,19 +117,19 @@ const PricingSection = () => {
 
   return (
     <section className="pricing-section">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="text-center mb-10"
+          variants={sectionHeader}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          className="text-center mb-8"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: '#0F172A' }}>
+          <h2 className="text-3xl md:text-4xl font-bold mb-3" style={{ color: '#1F2937' }}>
             Our <span className="pricing-gradient-text">Pricings Plan</span>
           </h2>
-          <p className="text-lg max-w-2xl mx-auto" style={{ color: '#374151' }}>
+          <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: '#4B5563' }}>
             We offer the best pricings around - from installations to repairs, maintenance, and more!
           </p>
         </motion.div>
@@ -142,10 +137,10 @@ const PricingSection = () => {
         {/* Value-Stacking Pricing Layout */}
         <motion.div
           className="value-stacking-container"
-          variants={containerVariants}
+          variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-50px' }}
+          viewport={viewportConfig}
           onMouseLeave={() => setHoveredIndex(null)}
         >
           {pricingPlans.map((plan, index) => {
@@ -162,7 +157,17 @@ const PricingSection = () => {
                 style={{
                   filter: isBlurred ? 'blur(3px)' : 'blur(0px)',
                 }}
-                transition={{ duration: 0.3 }}
+                animate={isHero ? {
+                  scale: [1, 1.01, 1],
+                } : {}}
+                transition={isHero ? {
+                  scale: {
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  },
+                  default: { duration: 0.3 }
+                } : { duration: 0.3 }}
               >
                 {/* Hero Badge */}
                 {isHero && (
@@ -250,11 +255,10 @@ const PricingSection = () => {
                   <motion.button
                     className={`value-cta-button ${isHero ? 'hero-button' : ''}`}
                     onClick={() => navigate('/register')}
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    initial={{ opacity: 0, y: 5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: 0.4 }}
+                    variants={buttonInteraction}
+                    initial="rest"
+                    whileHover="hover"
+                    whileTap="tap"
                   >
                     {plan.buttonLabel}
                   </motion.button>

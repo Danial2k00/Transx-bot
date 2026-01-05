@@ -4,9 +4,11 @@ import TradingCard from '../components/TradingCard'
 import ServicesSection from '../components/ServicesSection'
 import BenefitsSection from '../components/BenefitsSection'
 import HeroBackgroundAnimation from '../components/HeroBackgroundAnimation'
-import ProductRoadmap from '../components/ProductRoadmap'
+import HeroBotAnimation from '../components/HeroBotAnimation'
 import PricingSection from '../components/PricingSection'
 import TestimonialsSection from '../components/TestimonialsSection'
+import ProductRoadmap from '../components/ProductRoadmap'
+import { slideInFromLeft, slideInFromRight, slideInFromBottom, springConfig, viewportConfig, buttonInteraction, heroFadeZoom, floatUp, riseWithScale, ctaEmphasis, staggerContainer } from '../utils/motionUtils'
 
 const Home = () => {
   const navigate = useNavigate()
@@ -16,28 +18,28 @@ const Home = () => {
       title: 'In Stock',
       description: 'AI-powered stock trading with real-time analysis, pattern recognition, and automated execution strategies.',
       icon: '📈',
-      gradient: ['#6366F1', '#22D3EE'],
+      gradient: ['#DC2626', '#EF4444'],
       path: '/stocks',
     },
     {
       title: 'In Crypto',
       description: 'Advanced cryptocurrency trading bots with market sentiment analysis and risk management algorithms.',
       icon: '₿',
-      gradient: ['#10B981', '#DC2626'],
+      gradient: ['#DC2626', '#EF4444'],
       path: '/crypto',
     },
     {
       title: 'In Forex / Commodities',
       description: 'Intelligent forex and commodities trading with predictive analytics and automated position management.',
       icon: '💱',
-      gradient: ['#F59E0B', '#EF4444'],
+      gradient: ['#DC2626', '#B91C1C'],
       path: '/forex',
     },
     {
       title: 'In F.D / N.F.D',
       description: 'Fixed Deposit and Non-Fixed Deposit strategies optimized with AI for maximum returns and risk assessment.',
       icon: '💰',
-      gradient: ['#10B981', '#16A34A'],
+      gradient: ['#DC2626', '#EF4444'],
       path: '/fd-nfd',
     },
   ]
@@ -46,7 +48,7 @@ const Home = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center overflow-hidden" style={{
-        background: 'linear-gradient(135deg, #FAFAFA 0%, #F5F5F5 50%, #FAFAFA 100%)',
+        background: '#F7FAF5',
       }}>
         {/* Background Animation */}
         <HeroBackgroundAnimation />
@@ -55,36 +57,30 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Left Column - Content */}
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+              variants={heroFadeZoom}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportConfig}
               className="space-y-6 md:space-y-8"
             >
               {/* Headline - Sequential word reveal */}
               <div className="overflow-hidden">
                 <motion.h1 
                   className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight" 
-                  style={{ color: '#0F172A' }}
+                  style={{ color: '#243024' }}
+                  variants={staggerContainer}
                 >
                   {['Invest', 'in', 'Forex', 'with'].map((word, index) => (
                     <motion.span
                       key={index}
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ 
-                        duration: 0.6, 
-                        delay: index * 0.1,
-                        ease: 'easeOut'
-                      }}
+                      variants={slideInFromBottom}
                       className="inline-block mr-2"
                     >
                       {word}{' '}
                     </motion.span>
                   ))}
                   <motion.span
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
+                    variants={slideInFromBottom}
                     className="gradient-text inline-block"
                   >
                     AI Software
@@ -92,57 +88,73 @@ const Home = () => {
                 </motion.h1>
               </div>
 
-              {/* Description - Fade in after headline */}
+              {/* Description */}
               <motion.p 
                 className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed max-w-xl" 
-                style={{ color: '#374151' }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.5, ease: 'easeOut' }}
+                style={{ color: '#4A5A4A' }}
+                variants={slideInFromBottom}
+                transition={{ delay: 0.1 }}
               >
                 Maximize your returns by trading in global currencies. Whether you're a seasoned investor or just starting out, NEXT GEN BOT makes it easy to grow your earnings online.
               </motion.p>
 
-              {/* CTA Buttons - Animate last */}
+              {/* CTA Buttons */}
               <motion.div 
                 className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2 md:pt-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.7, ease: 'easeOut' }}
+                variants={slideInFromBottom}
+                transition={{ delay: 0.15 }}
               >
                 <motion.button
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
+                  variants={buttonInteraction}
+                  initial="rest"
+                  whileHover="hover"
+                  whileTap="tap"
                   onClick={() => navigate('/register')}
-                  className="px-6 md:px-8 py-3.5 md:py-4 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold text-base md:text-lg hover:shadow-xl hover:shadow-primary/50 transition-all duration-300 ease-in-out cursor-pointer w-full sm:w-auto"
-                  style={{ transformStyle: 'preserve-3d', minHeight: '48px' }}
+                  className="px-6 md:px-8 py-3.5 md:py-4 rounded-xl text-white font-semibold text-base md:text-lg transition-all duration-300 ease-in-out cursor-pointer w-full sm:w-auto relative overflow-hidden"
+                  style={{
+                    background: 'linear-gradient(135deg, #DC2626 0%, #EF4444 100%)',
+                    boxShadow: '0 4px 16px rgba(220, 38, 38, 0.3)',
+                    transformStyle: 'preserve-3d',
+                    minHeight: '48px'
+                  }}
+                  onHoverStart={() => {}}
+                  onHoverEnd={() => {}}
                 >
                   Register
                 </motion.button>
                 <motion.button
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
+                  variants={buttonInteraction}
+                  initial="rest"
+                  whileHover="hover"
+                  whileTap="tap"
                   onClick={() => navigate('/download')}
-                  className="px-6 md:px-8 py-3.5 md:py-4 rounded-lg border-2 border-primary text-primary font-semibold text-base md:text-lg hover:bg-primary/10 transition-all duration-300 ease-in-out cursor-pointer w-full sm:w-auto"
-                  style={{ transformStyle: 'preserve-3d', minHeight: '48px' }}
+                  className="px-6 md:px-8 py-3.5 md:py-4 rounded-xl border-2 font-semibold text-base md:text-lg hover:bg-olive-primary/10 transition-all duration-300 ease-in-out cursor-pointer w-full sm:w-auto relative overflow-hidden"
+                  style={{
+                    borderColor: '#DC2626',
+                    color: '#DC2626',
+                    transformStyle: 'preserve-3d',
+                    minHeight: '48px'
+                  }}
                 >
                   Download Now
                 </motion.button>
               </motion.div>
             </motion.div>
 
-            {/* Right Column - Hero Image */}
+            {/* Right Column - Bot Animation with 3D depth */}
             <motion.div
-              initial={{ opacity: 0, x: 50, scale: 0.9 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="relative flex items-center justify-center hero-image-wrapper"
+              variants={heroFadeZoom}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportConfig}
+              transition={{ delay: 0.2 }}
+              className="relative flex items-center justify-center hero-bot-wrapper"
+              style={{
+                transformStyle: 'preserve-3d',
+                perspective: '1000px',
+              }}
             >
-              <img
-                src="/robot-holographic-display.png.png"
-                alt="AI Trading Bot"
-                className="w-full h-auto max-w-2xl mx-auto object-contain hero-image-blended"
-              />
+              <HeroBotAnimation />
             </motion.div>
           </div>
         </div>
@@ -156,20 +168,20 @@ const Home = () => {
 
       {/* Trading Categories Section */}
       <section className="py-20" style={{
-        background: 'linear-gradient(135deg, #FAFAFA 0%, #F5F5F5 50%, #FAFAFA 100%)',
+        background: '#F7FAF5',
       }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            variants={slideInFromBottom}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
             className="text-center mb-16"
           >
-                <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: '#0F172A' }}>
+                <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: '#243024' }}>
                   Trading <span className="gradient-text">Categories</span>
                 </h2>
-                <p className="text-lg max-w-2xl mx-auto" style={{ color: '#374151' }}>
+                <p className="text-lg max-w-2xl mx-auto" style={{ color: '#4A5A4A' }}>
               Choose your preferred trading category and let AI optimize your strategy
             </p>
           </motion.div>
@@ -201,56 +213,111 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Product Roadmap Section */}
-      <ProductRoadmap />
-
       {/* Pricing Section */}
       <PricingSection />
 
       {/* Testimonials Section */}
       <TestimonialsSection />
 
+      {/* Product Roadmap Section */}
+      <ProductRoadmap />
+
       {/* CTA Section */}
-      <section className="py-10 md:py-12 border-t border-gray-200" style={{
-        background: 'linear-gradient(135deg, #FAFAFA 0%, #F5F5F5 50%, #FAFAFA 100%)',
-      }}>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.section 
+        className="py-10 md:py-12 border-t relative overflow-hidden"
+        style={{
+          borderColor: 'rgba(220, 38, 38, 0.1)'
+        }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        {/* Animated Background Gradient */}
+        <motion.div
+          className="absolute inset-0"
+          animate={{
+            background: [
+              'linear-gradient(135deg, #EEF3EC 0%, #E8F0E5 100%)',
+              'linear-gradient(135deg, #E8F0E5 0%, #EEF3EC 100%)',
+              'linear-gradient(135deg, #EEF3EC 0%, #E8F0E5 100%)',
+            ],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          style={{ zIndex: 0 }}
+        />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            variants={ctaEmphasis}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
             className="text-center max-w-3xl mx-auto"
           >
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4 px-4" style={{ color: '#0F172A' }}>
+                <motion.h2 
+                  className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4 px-4" 
+                  style={{ color: '#243024' }}
+                  variants={slideInFromBottom}
+                >
                   Ready to Transform Your <span className="gradient-text">Trading?</span>
-                </h2>
-                <p className="text-base sm:text-lg mb-6 px-4" style={{ color: '#374151' }}>
+                </motion.h2>
+                <motion.p 
+                  className="text-base sm:text-lg mb-6 px-4" 
+                  style={{ color: '#4A5A4A' }}
+                  variants={slideInFromBottom}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportConfig}
+                  transition={{ delay: 0.1 }}
+                >
               Join thousands of traders using AI to maximize their returns and minimize risks
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4">
+            </motion.p>
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4"
+              variants={slideInFromBottom}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportConfig}
+              transition={{ delay: 0.15 }}
+            >
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                variants={buttonInteraction}
+                initial="rest"
+                whileHover="hover"
+                whileTap="tap"
                 onClick={() => navigate('/register')}
-                className="px-6 md:px-8 py-3.5 md:py-4 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold text-base md:text-lg hover:shadow-2xl hover:shadow-primary/50 transition-all cursor-pointer w-full sm:w-auto"
-                style={{ minHeight: '48px' }}
+                className="px-6 md:px-8 py-3.5 md:py-4 rounded-xl text-white font-semibold text-base md:text-lg transition-all cursor-pointer w-full sm:w-auto relative overflow-hidden"
+                style={{
+                  background: 'linear-gradient(135deg, #DC2626 0%, #EF4444 100%)',
+                  boxShadow: '0 4px 16px rgba(220, 38, 38, 0.3)',
+                  minHeight: '48px'
+                }}
               >
                 Register
               </motion.button>
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                variants={buttonInteraction}
+                initial="rest"
+                whileHover="hover"
+                whileTap="tap"
                 onClick={() => navigate('/download')}
-                className="px-6 md:px-8 py-3.5 md:py-4 rounded-lg border-2 border-primary text-primary font-semibold text-base md:text-lg hover:bg-primary/10 transition-all cursor-pointer w-full sm:w-auto"
-                style={{ minHeight: '48px' }}
+                className="px-6 md:px-8 py-3.5 md:py-4 rounded-xl border-2 font-semibold text-base md:text-lg hover:bg-olive-primary/10 transition-all cursor-pointer w-full sm:w-auto relative overflow-hidden"
+                style={{
+                  borderColor: '#DC2626',
+                  color: '#DC2626',
+                  minHeight: '48px'
+                }}
               >
                 Download Now
               </motion.button>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
-      </section>
+      </motion.section>
     </div>
   )
 }

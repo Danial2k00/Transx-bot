@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { slideInFromBottom, viewportConfig } from '../utils/motionUtils'
 
 const Footer = () => {
+  const ref = useRef(null)
   const footerLinks = {
     Trading: [
       { path: '/stocks', label: 'Stock Trading' },
@@ -23,9 +26,18 @@ const Footer = () => {
   }
 
   return (
-    <footer className="border-t border-gray-200 mt-12 md:mt-16 lg:mt-20" style={{
-      background: 'linear-gradient(135deg, #FAFAFA 0%, #F5F5F5 50%, #FAFAFA 100%)',
-    }}>
+    <motion.footer 
+      ref={ref}
+      className="border-t mt-12 md:mt-16 lg:mt-20" 
+      style={{
+        background: '#F7F8FA',
+        borderColor: 'rgba(229, 231, 235, 0.8)'
+      }}
+      variants={slideInFromBottom}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewportConfig}
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10 lg:py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8">
           <div className="lg:col-span-2">
@@ -50,7 +62,7 @@ const Footer = () => {
                 />
               </div>
             </Link>
-            <p className="text-sm max-w-md" style={{ color: '#374151' }}>
+            <p className="text-sm max-w-md" style={{ color: '#4B5563' }}>
               Advanced AI-powered trading solutions for stocks, crypto, forex, and more.
               Transform your trading strategy with intelligent automation.
             </p>
@@ -58,19 +70,25 @@ const Footer = () => {
 
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
-              <h3 className="font-semibold mb-4" style={{ color: '#0F172A' }}>{category}</h3>
+              <h3 className="font-semibold mb-4" style={{ color: '#1F2937' }}>{category}</h3>
               <ul className="space-y-2">
                 {links.map((link) => (
                   <li key={link.label}>
-                    <Link
-                      to={link.path}
-                      className="text-sm transition-colors"
-                      style={{ color: '#6B7280' }}
-                      onMouseEnter={(e) => e.target.style.color = '#DC2626'}
-                      onMouseLeave={(e) => e.target.style.color = '#6B7280'}
-                    >
-                      {link.label}
-                    </Link>
+                    <motion.div className="relative inline-block">
+                      <Link
+                        to={link.path}
+                        className="text-sm transition-colors relative"
+                        style={{ color: '#9CA3AF' }}
+                      >
+                        {link.label}
+                        <motion.div
+                          className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-[#DC2626] to-[#EF4444]"
+                          initial={{ width: 0 }}
+                          whileHover={{ width: '100%' }}
+                          transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                        />
+                      </Link>
+                    </motion.div>
                   </li>
                 ))}
               </ul>
@@ -78,29 +96,35 @@ const Footer = () => {
           ))}
         </div>
 
-        <div className="mt-6 md:mt-8 pt-6 md:pt-8 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-center sm:text-left" style={{ color: '#6B7280' }}>
+        <div className="mt-6 md:mt-8 pt-6 md:pt-8 border-t flex flex-col sm:flex-row justify-between items-center gap-4" style={{ borderColor: 'rgba(229, 231, 235, 0.8)' }}>
+            <p className="text-sm text-center sm:text-left" style={{ color: '#6B7280' }}>
             &copy; {new Date().getFullYear()} Next Gen Bot. All rights reserved.
           </p>
           <div className="flex space-x-6">
             {['Twitter', 'LinkedIn', 'GitHub'].map((social) => (
-              <a
+              <motion.a
                 key={social}
                 href="#"
                 className="transition-colors duration-200 text-sm"
                 style={{ color: '#6B7280' }}
-                onMouseEnter={(e) => e.target.style.color = '#6366F1'}
-                onMouseLeave={(e) => e.target.style.color = '#6B7280'}
+                whileHover={{
+                  color: '#6366F1',
+                  rotate: [0, -5, 5, -5, 0],
+                }}
+                transition={{
+                  rotate: { type: 'spring', stiffness: 400, damping: 15 },
+                  color: { duration: 0.2 }
+                }}
               >
                 {social}
-              </a>
+              </motion.a>
             ))}
           </div>
         </div>
-      </div>
-    </footer>
-  )
-}
-
-export default Footer
+        </div>
+      </motion.footer>
+    )
+  }
+  
+  export default Footer
 

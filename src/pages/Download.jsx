@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+import { slideInFromBottom, floatUp, viewportConfig } from '../utils/motionUtils'
 
 const Download = () => {
   const navigate = useNavigate()
@@ -62,9 +63,10 @@ const Download = () => {
     <div className="min-h-screen py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          variants={slideInFromBottom}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
           className="max-w-4xl mx-auto"
         >
           {/* Header */}
@@ -123,9 +125,11 @@ const Download = () => {
 
           {/* App Details */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            variants={slideInFromBottom}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            transition={{ delay: 0.2 }}
             className="bg-card-dark rounded-2xl border border-white/10 p-8 mb-8"
           >
             <h2 className="text-2xl font-bold text-white mb-4">What's Included</h2>

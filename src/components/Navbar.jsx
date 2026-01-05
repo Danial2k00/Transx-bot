@@ -1,15 +1,22 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
+import './Navbar.css'
 
 const Navbar = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [hasLoaded, setHasLoaded] = useState(false)
   const desktopDropdownRef = useRef(null)
   const mobileDropdownRef = useRef(null)
   const timeoutRef = useRef(null)
+
+  // Track initial load for blur-to-clear effect
+  useEffect(() => {
+    setHasLoaded(true)
+  }, [])
 
   // Scroll detection for header switching
   useEffect(() => {
@@ -123,11 +130,13 @@ const Navbar = () => {
               display: 'block',
             }}
             animate={{
-              scale: 1,
+              y: [0, -3, 0],
             }}
             transition={{
-              duration: 0.3,
+              duration: 4,
+              repeat: Infinity,
               ease: 'easeInOut',
+              delay: 1,
             }}
           />
         </motion.div>
@@ -145,24 +154,18 @@ const Navbar = () => {
             <Link
               to="/"
               onClick={handleHomeClick}
-              className={`relative inline-block text-sm font-medium transition-colors ${
-                location.pathname === '/' || isDropdownActive
-                  ? 'text-secondary'
-                  : 'text-text-light hover:text-secondary'
+              className={`nav-link text-sm font-medium transition-colors ${
+                location.pathname === '/' || isDropdownActive ? 'active' : ''
               }`}
+              style={{
+                color: location.pathname === '/' || isDropdownActive ? '#DC2626' : '#4B5563'
+              }}
             >
               Home
-              {(location.pathname === '/' || isDropdownActive) && (
-                <motion.div
-                  layoutId="navbar-indicator"
-                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-secondary"
-                  initial={false}
-                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                />
-              )}
             </Link>
             <motion.svg
-              className="w-4 h-4 text-text-light flex-shrink-0 pointer-events-none"
+              className="w-4 h-4 flex-shrink-0 pointer-events-none"
+              style={{ color: '#4B5563' }}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -189,10 +192,11 @@ const Navbar = () => {
                 className="absolute top-full left-0 mt-3 w-56 rounded-lg border border-gray-200 overflow-hidden"
                 style={{ 
                   zIndex: 50,
-                  background: 'rgba(255, 255, 255, 0.95)',
+                  background: 'rgba(255, 255, 255, 0.98)',
                   backdropFilter: 'blur(10px)',
                   WebkitBackdropFilter: 'blur(10px)',
-                  boxShadow: '0 20px 40px -12px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05)' 
+                  boxShadow: '0 20px 40px -12px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05)',
+                  borderColor: 'rgba(229, 231, 235, 0.8)'
                 }}
               >
                 <div className="py-2">
@@ -207,12 +211,11 @@ const Navbar = () => {
                         to={item.path}
                         onClick={() => setIsDropdownOpen(false)}
                         onKeyDown={(e) => handleKeyDown(e, item.path)}
-                        className={`block px-4 py-3 text-sm font-medium transition-all duration-200 ${
-                          location.pathname === item.path
-                            ? 'text-secondary bg-primary/10'
-                            : 'text-[#0F172A] hover:text-secondary hover:bg-primary/10'
-                        }`}
-                        style={{ letterSpacing: '-0.01em' }}
+                        className="block px-4 py-3 text-sm font-medium transition-all duration-200 hover:bg-gray-100"
+                        style={{
+                          color: location.pathname === item.path ? '#DC2626' : '#1F2937',
+                          letterSpacing: '-0.01em'
+                        }}
                         role="menuitem"
                         tabIndex={0}
                       >
@@ -228,10 +231,17 @@ const Navbar = () => {
 
         {/* Register Button */}
         <motion.button
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ 
+            scale: 1.03,
+            boxShadow: '0 6px 24px rgba(99, 102, 241, 0.4)'
+          }}
           whileTap={{ scale: 0.95 }}
           onClick={() => navigate('/register')}
-          className="px-6 py-2.5 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold text-sm hover:shadow-lg hover:shadow-primary/50 transition-all cursor-pointer"
+          className="px-6 py-2.5 rounded-lg text-white font-semibold text-sm hover:shadow-lg transition-all cursor-pointer"
+          style={{
+            background: 'linear-gradient(135deg, #DC2626 0%, #EF4444 100%)',
+            boxShadow: '0 4px 16px rgba(99, 102, 241, 0.3)'
+          }}
         >
           Register
         </motion.button>
@@ -241,7 +251,11 @@ const Navbar = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => navigate('/download')}
-          className="px-6 py-2.5 rounded-lg border-2 border-primary text-primary font-semibold text-sm hover:bg-primary/10 transition-all cursor-pointer"
+          className="px-6 py-2.5 rounded-lg border-2 font-semibold text-sm hover:bg-gray-100 transition-all cursor-pointer"
+          style={{
+            borderColor: '#6366F1',
+            color: '#DC2626'
+          }}
         >
           Download
         </motion.button>
@@ -262,7 +276,8 @@ const Navbar = () => {
             style={{ minWidth: '44px', minHeight: '44px' }}
           >
             <motion.svg
-              className="w-6 h-6 text-text-light"
+              className="w-6 h-6"
+              style={{ color: '#4B5563' }}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -292,7 +307,8 @@ const Navbar = () => {
                   background: 'rgba(255, 255, 255, 0.98)',
                   backdropFilter: 'blur(10px)',
                   WebkitBackdropFilter: 'blur(10px)',
-                  boxShadow: '0 20px 40px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05)' 
+                  boxShadow: '0 20px 40px -12px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05)',
+                  borderColor: 'rgba(229, 231, 235, 0.8)'
                 }}
               >
                 <div className="py-1">
@@ -302,12 +318,13 @@ const Navbar = () => {
                       setIsDropdownOpen(false)
                       handleHomeClick()
                     }}
-                    className={`block px-4 py-3 text-base font-medium transition-all duration-200 ${
-                      location.pathname === '/'
-                        ? 'text-secondary bg-primary/10'
-                        : 'text-[#0F172A] active:bg-primary/10'
-                    }`}
-                    style={{ minHeight: '44px', display: 'flex', alignItems: 'center' }}
+                    className="block px-4 py-3 text-base font-medium transition-all duration-200 active:bg-gray-100"
+                    style={{
+                      color: location.pathname === '/' ? '#DC2626' : '#1F2937',
+                      minHeight: '44px',
+                      display: 'flex',
+                      alignItems: 'center'
+                    }}
                   >
                     Home
                   </Link>
@@ -322,12 +339,13 @@ const Navbar = () => {
                         to={item.path}
                         onClick={() => setIsDropdownOpen(false)}
                         onKeyDown={(e) => handleKeyDown(e, item.path)}
-                        className={`block px-4 py-3 text-base font-medium transition-all duration-200 ${
-                          location.pathname === item.path
-                            ? 'text-secondary bg-primary/10'
-                            : 'text-[#0F172A] active:bg-primary/10'
-                        }`}
-                        style={{ minHeight: '44px', display: 'flex', alignItems: 'center' }}
+                        className="block px-4 py-3 text-base font-medium transition-all duration-200 active:bg-gray-100"
+                        style={{
+                          color: location.pathname === item.path ? '#DC2626' : '#1F2937',
+                          minHeight: '44px',
+                          display: 'flex',
+                          alignItems: 'center'
+                        }}
                         role="menuitem"
                         tabIndex={0}
                       >
@@ -349,8 +367,13 @@ const Navbar = () => {
                         navigate('/register')
                         setIsDropdownOpen(false)
                       }}
-                      className="w-full text-left px-4 py-3 text-base font-semibold bg-gradient-to-r from-primary to-secondary text-white active:opacity-90 transition-all cursor-pointer"
-                      style={{ minHeight: '48px', display: 'flex', alignItems: 'center' }}
+                      className="w-full text-left px-4 py-3 text-base font-semibold text-white active:opacity-90 transition-all cursor-pointer"
+                      style={{
+                        background: 'linear-gradient(135deg, #6366F1 0%, #22D3EE 100%)',
+                        minHeight: '48px',
+                        display: 'flex',
+                        alignItems: 'center'
+                      }}
                     >
                       Register
                     </motion.button>
@@ -369,8 +392,14 @@ const Navbar = () => {
                         navigate('/download')
                         setIsDropdownOpen(false)
                       }}
-                      className="w-full text-left px-4 py-3 text-base font-semibold border-2 border-primary text-primary active:bg-primary/10 transition-all cursor-pointer"
-                      style={{ minHeight: '48px', display: 'flex', alignItems: 'center' }}
+                      className="w-full text-left px-4 py-3 text-base font-semibold border-2 active:bg-gray-100 transition-all cursor-pointer"
+                      style={{
+                        borderColor: '#6366F1',
+                        color: '#DC2626',
+                        minHeight: '48px',
+                        display: 'flex',
+                        alignItems: 'center'
+                      }}
                     >
                       Download
                     </motion.button>
@@ -390,14 +419,24 @@ const Navbar = () => {
       <AnimatePresence>
         {!isScrolled && (
           <motion.nav
-            initial={{ y: 0, opacity: 1 }}
+            initial={{ y: -20, opacity: 0, filter: 'blur(10px)' }}
+            animate={{ 
+              y: 0, 
+              opacity: 1, 
+              filter: hasLoaded ? 'blur(0px)' : 'blur(10px)'
+            }}
             exit={{ y: -100, opacity: 0 }}
-            transition={{ duration: 0.4, ease: 'easeInOut' }}
-            className="fixed top-0 left-0 right-0 z-40 border-b border-gray-200"
+            transition={{ 
+              duration: 0.5, 
+              ease: [0.25, 0.46, 0.45, 0.94],
+              filter: { duration: 0.6 }
+            }}
+            className="fixed top-0 left-0 right-0 z-40 border-b"
             style={{
-              background: 'rgba(246, 247, 251, 0.9)',
+              background: 'rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(10px)',
               WebkitBackdropFilter: 'blur(10px)',
+              borderColor: 'rgba(229, 231, 235, 0.8)'
             }}
           >
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -413,16 +452,21 @@ const Navbar = () => {
       <AnimatePresence>
         {isScrolled && (
           <motion.nav
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -100, opacity: 0 }}
-            transition={{ duration: 0.4, ease: 'easeInOut' }}
-            className="fixed top-0 left-0 right-0 z-40 border-b border-gray-200"
+            initial={{ y: -100, opacity: 0, scale: 0.95 }}
+            animate={{ y: 0, opacity: 1, scale: 1 }}
+            exit={{ y: -100, opacity: 0, scale: 0.95 }}
+            transition={{ 
+              duration: 0.4, 
+              ease: [0.25, 0.46, 0.45, 0.94],
+              scale: { duration: 0.3 }
+            }}
+            className="fixed top-0 left-0 right-0 z-40 border-b"
             style={{
               background: 'rgba(255, 255, 255, 0.98)',
               backdropFilter: 'blur(10px)',
               WebkitBackdropFilter: 'blur(10px)',
               boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+              borderColor: 'rgba(229, 231, 235, 0.8)'
             }}
           >
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">

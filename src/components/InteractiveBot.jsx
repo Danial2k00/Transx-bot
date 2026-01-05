@@ -170,7 +170,7 @@ const InteractiveBot = () => {
             width="60"
             height="30"
             rx="5"
-            fill="#10B981"
+            fill="#DC2626"
             stroke="#0F172A"
             strokeWidth="2"
             animate={isHovered ? { height: 35 } : { height: 30 }}
@@ -225,17 +225,17 @@ const InteractiveBot = () => {
           <ellipse cx="245" cy="395" rx="20" ry="15" fill="#0F172A" />
 
           {/* Chest Panel */}
-          <rect x="160" y="240" width="80" height="60" rx="8" fill="rgba(16, 185, 129, 0.1)" stroke="#10B981" strokeWidth="2" />
+          <rect x="160" y="240" width="80" height="60" rx="8" fill="rgba(220, 38, 38, 0.1)" stroke="#DC2626" strokeWidth="2" />
           {/* Chest Panel Lines */}
-          <line x1="170" y1="255" x2="230" y2="255" stroke="#10B981" strokeWidth="1.5" />
-          <line x1="170" y1="270" x2="220" y2="270" stroke="#10B981" strokeWidth="1.5" />
-          <line x1="170" y1="285" x2="240" y2="285" stroke="#10B981" strokeWidth="1.5" />
+          <line x1="170" y1="255" x2="230" y2="255" stroke="#DC2626" strokeWidth="1.5" />
+          <line x1="170" y1="270" x2="220" y2="270" stroke="#DC2626" strokeWidth="1.5" />
+          <line x1="170" y1="285" x2="240" y2="285" stroke="#DC2626" strokeWidth="1.5" />
 
           {/* Gradient Definition */}
           <defs>
             <linearGradient id="botGradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#DC2626" />
-              <stop offset="50%" stopColor="#10B981" />
+              <stop offset="50%" stopColor="#DC2626" />
               <stop offset="100%" stopColor="#2563EB" />
             </linearGradient>
           </defs>
