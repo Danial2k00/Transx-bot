@@ -1,0 +1,88 @@
+.ai-trading-background {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  background: transparent;
+  border-radius: 16px;
+}
+
+.ai-trading-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+}
+
+.ai-trading-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.graph-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 8s ease-in-out infinite;
+  filter: url(#glow);
+}
+
+.graph-line-1 {
+  animation-delay: 0s;
+  animation-duration: 10s;
+}
+
+.graph-line-2 {
+  animation-delay: 2s;
+  animation-duration: 12s;
+}
+
+.graph-line-3 {
+  animation-delay: 4s;
+  animation-duration: 14s;
+}
+
+@keyframes drawLine {
+  0% {
+    stroke-dashoffset: 1000;
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.6;
+  }
+  80% {
+    opacity: 0.6;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+/* Smooth continuous motion for all elements */
+.ai-trading-background * {
+  will-change: transform, opacity;
+}
+
+/* Ensure minimal, premium look */
+@media (prefers-reduced-motion: reduce) {
+  .graph-line {
+    animation: none;
+    stroke-dashoffset: 0;
+    opacity: 0.3;
+  }
+  
+  .ai-trading-canvas {
+    opacity: 0.3;
+  }
+}
+

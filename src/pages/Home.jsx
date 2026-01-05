@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import TradingCard from '../components/TradingCard'
 import ServicesSection from '../components/ServicesSection'
 import BenefitsSection from '../components/BenefitsSection'
-import HeroBackgroundAnimation from '../components/HeroBackgroundAnimation'
 import HeroBotAnimation from '../components/HeroBotAnimation'
 import PricingSection from '../components/PricingSection'
 import TestimonialsSection from '../components/TestimonialsSection'
@@ -50,9 +49,6 @@ const Home = () => {
       <section className="relative min-h-screen flex items-center overflow-hidden" style={{
         background: '#F7FAF5',
       }}>
-        {/* Background Animation */}
-        <HeroBackgroundAnimation />
-        
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-20 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Left Column - Content */}
@@ -141,17 +137,17 @@ const Home = () => {
               </motion.div>
             </motion.div>
 
-            {/* Right Column - Bot Animation with 3D depth */}
+            {/* Right Column - Bot Animation */}
             <motion.div
-              variants={heroFadeZoom}
+              variants={slideInFromRight}
               initial="hidden"
               whileInView="visible"
               viewport={viewportConfig}
               transition={{ delay: 0.2 }}
-              className="relative flex items-center justify-center hero-bot-wrapper"
+              className="relative flex items-center justify-center"
               style={{
-                transformStyle: 'preserve-3d',
-                perspective: '1000px',
+                minHeight: '500px',
+                height: '100%',
               }}
             >
               <HeroBotAnimation />
