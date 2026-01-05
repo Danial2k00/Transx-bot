@@ -7,12 +7,10 @@ import Forex from './pages/Forex'
 import FDNFD from './pages/FDNFD'
 import Register from './pages/Register'
 import Download from './pages/Download'
-import AnimatedCursor from './components/AnimatedCursor'
 
 function App() {
   return (
     <Router>
-      <AnimatedCursor />
       <Routes>
         <Route path="/" element={<HomeLayout />}>
           <Route index element={<Home />} />

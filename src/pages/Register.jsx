@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+import { slideInFromBottom, viewportConfig } from '../utils/motionUtils'
 
 const Register = () => {
   const navigate = useNavigate()
@@ -87,9 +88,10 @@ const Register = () => {
     <div className="min-h-screen py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          variants={slideInFromBottom}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
           className="max-w-md mx-auto"
         >
           <div className="bg-card-dark rounded-2xl border border-white/10 p-8 shadow-xl">
@@ -104,9 +106,9 @@ const Register = () => {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-6 p-4 bg-green-500/20 border border-green-500/50 rounded-lg"
+                className="mb-6 p-4 bg-red-500/20 border border-red-500/50 rounded-lg"
               >
-                <p className="text-green-400 text-sm text-center">
+                <p className="text-red-400 text-sm text-center">
                   ✓ Registration successful! Welcome aboard.
                 </p>
               </motion.div>
@@ -213,6 +215,11 @@ const Register = () => {
 }
 
 export default Register
+
+
+
+
+
 
 
 

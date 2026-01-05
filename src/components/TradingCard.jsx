@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { slideInFromBottom, cardHover, viewportConfig, get3DTilt } from '../utils/motionUtils'
 
 const TradingCard = ({ title, description, icon, gradient, path, delay = 0 }) => {
   const [rotate, setRotate] = useState({ x: 0, y: 0 })
@@ -13,16 +14,8 @@ const TradingCard = ({ title, description, icon, gradient, path, delay = 0 }) =>
 
     const card = cardRef.current
     const rect = card.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-
-    const centerX = rect.width / 2
-    const centerY = rect.height / 2
-
-    const rotateX = (y - centerY) / 10
-    const rotateY = (centerX - x) / 10
-
-    setRotate({ x: rotateX, y: rotateY })
+    const tilt = get3DTilt(e.clientX, e.clientY, rect)
+    setRotate({ x: tilt.rotateX, y: tilt.rotateY })
   }
 
   const handleMouseLeave = () => {
@@ -37,14 +30,11 @@ const TradingCard = ({ title, description, icon, gradient, path, delay = 0 }) =>
   return (
     <motion.div
       ref={cardRef}
-      initial={{ opacity: 0, y: 60, scale: 0.9, rotateX: -10 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ 
-        duration: 0.7, 
-        delay: delay || 0,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }}
+      variants={slideInFromBottom}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewportConfig}
+      transition={{ delay: delay || 0 }}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
@@ -60,10 +50,10 @@ const TradingCard = ({ title, description, icon, gradient, path, delay = 0 }) =>
         animate={{
           rotateX: rotate.x,
           rotateY: rotate.y,
-          y: isHovered ? -6 : 0,
-          scale: isHovered ? 1.02 : 1,
         }}
-        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+        variants={cardHover}
+        initial="rest"
+        whileHover="hover"
         style={{
           transformStyle: 'preserve-3d',
         }}
@@ -72,8 +62,8 @@ const TradingCard = ({ title, description, icon, gradient, path, delay = 0 }) =>
           className="relative h-full p-8 rounded-2xl border overflow-hidden group"
           style={{
             background: '#FFFFFF',
-            boxShadow: '0 4px 24px rgba(107, 142, 35, 0.08), 0 0 0 1px rgba(107, 142, 35, 0.08)',
-            borderColor: 'rgba(107, 142, 35, 0.1)',
+            boxShadow: '0 4px 24px rgba(220, 38, 38, 0.08), 0 0 0 1px rgba(220, 38, 38, 0.08)',
+            borderColor: 'rgba(220, 38, 38, 0.1)',
           }}
         >
           {/* Glow Effect */}
@@ -118,7 +108,7 @@ const TradingCard = ({ title, description, icon, gradient, path, delay = 0 }) =>
 
             <motion.div
               className="mt-6 flex items-center font-semibold text-sm"
-              style={{ color: '#6B8E23' }}
+              style={{ color: '#DC2626' }}
               animate={{
                 x: isHovered ? 10 : 0,
               }}

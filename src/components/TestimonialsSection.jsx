@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'framer-motion'
+import { slideInFromBottom, sectionHeader, cardHover, viewportConfig, buttonInteraction, staggerContainer } from '../utils/motionUtils'
 
 const TestimonialsSection = () => {
   const ref = useRef(null)
@@ -102,9 +103,10 @@ const TestimonialsSection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
+          variants={sectionHeader}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
           className="text-center mb-10"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: '#0F172A' }}>
@@ -142,12 +144,11 @@ const TestimonialsSection = () => {
                       width: `${100 / cardsPerView}%`,
                       perspective: '1000px',
                     }}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                    transition={{
-                      duration: 0.6,
-                      delay: 0.2 + (index % 2) * 0.1,
-                    }}
+                    variants={slideInFromBottom}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={viewportConfig}
+                    transition={{ delay: index * 0.1 }}
                     onMouseEnter={() => setHoveredCard(index)}
                     onMouseLeave={() => setHoveredCard(null)}
                   >
@@ -158,16 +159,10 @@ const TestimonialsSection = () => {
                         boxShadow: '0 4px 24px rgba(220, 38, 38, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.04)',
                         transformStyle: 'preserve-3d',
                       }}
-                      animate={{
-                        y: hoveredCard === index ? -6 : 0,
-                        scale: hoveredCard === index ? 1.02 : 1,
-                        rotateX: hoveredCard === index ? 2 : 0,
-                      }}
-                      transition={{
-                        type: 'spring',
-                        stiffness: 300,
-                        damping: 20,
-                      }}
+                      variants={cardHover}
+                      initial="rest"
+                      whileHover="hover"
+                      animate={hoveredCard === index ? 'hover' : 'rest'}
                     >
                       {/* Hover Glow Effect */}
                       {hoveredCard === index && (
@@ -201,7 +196,7 @@ const TestimonialsSection = () => {
                           <defs>
                             <linearGradient id="quoteGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                               <stop offset="0%" stopColor="#DC2626" />
-                              <stop offset="100%" stopColor="#10B981" />
+                              <stop offset="100%" stopColor="#DC2626" />
                             </linearGradient>
                           </defs>
                         </svg>
@@ -221,9 +216,19 @@ const TestimonialsSection = () => {
 
                         {/* Client Info */}
                         <div className="flex items-center">
-                          <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white font-bold text-lg mr-4">
+                          <motion.div 
+                            className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white font-bold text-lg mr-4"
+                            animate={currentIndex >= index && currentIndex < index + Math.ceil(cardsPerView) ? {
+                              scale: [1, 1.05, 1],
+                            } : { scale: 1 }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: 'easeInOut',
+                            }}
+                          >
                             {testimonial.name.charAt(0)}
-                          </div>
+                          </motion.div>
                           <div>
                             <h4
                               className="font-bold text-lg"
@@ -270,8 +275,10 @@ const TestimonialsSection = () => {
               <motion.button
                 onClick={handlePrev}
                 disabled={currentIndex === 0}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                variants={buttonInteraction}
+                initial="rest"
+                whileHover="hover"
+                whileTap="tap"
                 className="w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{
                   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
@@ -294,8 +301,10 @@ const TestimonialsSection = () => {
               <motion.button
                 onClick={handleNext}
                 disabled={currentIndex >= maxIndex}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                variants={buttonInteraction}
+                initial="rest"
+                whileHover="hover"
+                whileTap="tap"
                 className="w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{
                   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',

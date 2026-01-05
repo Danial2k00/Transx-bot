@@ -7,24 +7,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Olive Green Theme
-        'olive-primary': '#6B8E23',
-        'olive-soft': '#8FAF6A',
-        'olive-success': '#4CAF50',
-        'olive-cta': '#5E7C3A',
-        'olive-neutral': '#2F3A2F',
-        // Background colors
-        'bg-main': '#F7FAF5',
-        'bg-section': '#EEF3EC',
-        'bg-card': '#FFFFFF',
-        'bg-card-alt': '#FAFBF9',
-        // Text colors
-        'text-heading': '#243024',
-        'text-body': '#4A5A4A',
-        'text-muted': '#7A8A7A',
-        // Legacy aliases for compatibility
-        'primary': '#6B8E23',
-        'secondary': '#8FAF6A',
+        // Pleasant Light Fintech Theme
+        'bg-primary': '#F7F8FA',
+        'bg-section': '#FFFFFF',
+        'bg-section-alt': '#F2F5F9',
+        'accent-red': '#DC2626',
+        'accent-red-light': '#EF4444',
+        'success': '#DC2626',
+        'text-heading': '#1F2937',
+        'text-body': '#4B5563',
+        'text-muted': '#9CA3AF',
+        'border-soft': '#E5E7EB',
+        // Legacy aliases
+        'primary': '#DC2626',
+        'secondary': '#EF4444',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
@@ -37,4 +33,3 @@ export default {
   },
   plugins: [],
 }
-

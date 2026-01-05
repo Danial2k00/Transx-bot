@@ -71,7 +71,7 @@ const MarketAwakening = () => {
           <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#6366F1" stopOpacity="0.8" />
             <stop offset="50%" stopColor="#22D3EE" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="#10B981" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="#DC2626" stopOpacity="0.4" />
           </linearGradient>
           <filter id="lineGlow">
             <feGaussianBlur stdDeviation="2" result="coloredBlur" />
@@ -165,13 +165,13 @@ const MarketAwakening = () => {
       >
         <svg viewBox="0 0 200 120" className="w-full h-full">
           {[
-            { x: 20, y: 40, h: 30, color: '#10B981' },
-            { x: 40, y: 30, h: 40, color: '#10B981' },
-            { x: 60, y: 50, h: 20, color: '#10B981' },
+            { x: 20, y: 40, h: 30, color: '#DC2626' },
+            { x: 40, y: 30, h: 40, color: '#DC2626' },
+            { x: 60, y: 50, h: 20, color: '#DC2626' },
             { x: 80, y: 20, h: 50, color: '#EF4444' },
             { x: 100, y: 35, h: 35, color: '#EF4444' },
-            { x: 120, y: 25, h: 45, color: '#10B981' },
-            { x: 140, y: 45, h: 25, color: '#10B981' },
+            { x: 120, y: 25, h: 45, color: '#DC2626' },
+            { x: 140, y: 45, h: 25, color: '#DC2626' },
             { x: 160, y: 15, h: 55, color: '#EF4444' },
           ].map((candle, index) => (
             <g key={index}>

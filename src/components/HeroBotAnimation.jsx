@@ -194,7 +194,7 @@ const HeroBotAnimation = () => {
               cx="160"
               cy="80"
               r="6"
-              fill="#10B981"
+              fill="#DC2626"
               animate={{
                 scale: [1, 1.3, 1],
                 opacity: [0.8, 1, 0.8],

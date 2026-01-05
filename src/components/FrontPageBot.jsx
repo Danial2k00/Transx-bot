@@ -225,7 +225,7 @@ const FrontPageBot = () => {
                 {/* Speaking indicator */}
                 {isSpeaking && (
                   <motion.div
-                    className="absolute -top-2 -right-2 w-6 h-6 bg-green-400 rounded-full flex items-center justify-center"
+                    className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center"
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 1, repeat: Infinity }}
                   >
